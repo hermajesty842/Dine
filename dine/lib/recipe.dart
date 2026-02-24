@@ -6,7 +6,7 @@ class Myrecipe {
   int servings;
   List<Ingredient> ingredients;
   static List<Myrecipe> samples = [
-    Myrecipe('lasagna', 'Assets/images/lasagna.jpg', 4, [
+    Myrecipe('lasagna', 'assets/images/lasagna.jpg', 4, [
       Ingredient(3, "oz", "Tomatopaste"),
       Ingredient(1, "tsp", "Dried oregano"),
       Ingredient(28, "oz", "Marinara"),
