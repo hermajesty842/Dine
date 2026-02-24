@@ -25,6 +25,15 @@ class _DetailState extends State<Detail> {
             ),
             SizedBox(height: 4),
             Text(widget.recipe.label, style: TextStyle(fontSize: 20)),
+            Expanded(child: ListView.builder(
+              padding: EdgeInsets.all(8.0),
+              itemCount: widget.recipe.ingredients.length,
+              itemBuilder:( BuildContext context, int index) {
+                final ingredient=widget.recipe.ingredients[index];
+                return Text('${ingredient.quantity} ${ingredient.measure} ${ingredient.name}');
+              },
+              ),
+              ),
           ],
         ),
       ),
