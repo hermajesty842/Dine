@@ -1,5 +1,7 @@
+import 'package:dine/data/notifiers.dart';
 import 'package:flutter/material.dart';
 import 'package:dine/recipe.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 int sliderval = 1;
 
@@ -18,6 +20,23 @@ class _DetailState extends State<Detail> {
       appBar: AppBar(
         title: Text(widget.recipe.label),
         backgroundColor: Colors.blue,
+        actions: [
+          IconButton(
+            onPressed: () async {
+              isdarkmodenotifier.value = !isdarkmodenotifier.value;
+              final SharedPreferences prefs =
+                  await SharedPreferences.getInstance();
+              await prefs.setBool('kconstants.thememodekey',
+              isdarkmodenotifier.value);
+            },
+            icon: ValueListenableBuilder(
+              valueListenable: isdarkmodenotifier,
+              builder: (context, isdarkmode, child) {
+                return Icon(isdarkmode?Icons.dark_mode:Icons.light_mode);
+              },
+            ),
+          ),
+        ],
       ),
       body: SafeArea(
         child: Column(
@@ -36,25 +55,25 @@ class _DetailState extends State<Detail> {
                 itemBuilder: (BuildContext context, int index) {
                   final ingredient = widget.recipe.ingredients[index];
                   return Text(
-                    '${ingredient.quantity*sliderval} ${ingredient.measure} ${ingredient.name}',
+                    '${ingredient.quantity * sliderval} ${ingredient.measure} ${ingredient.name}',
                   );
                 },
               ),
             ),
             Slider(
-               min: 1,
-               max: 10,
-               divisions: 9,
-               label: '${sliderval*widget.recipe.servings}servings',
+              min: 1,
+              max: 10,
+              divisions: 9,
+              label: '${sliderval * widget.recipe.servings}servings',
               value: sliderval.toDouble(),
-               onChanged: (value) {
-                 setState(() {
-                   sliderval=value.round();
-                 });
-               },
-               activeColor: Colors.green,
-               inactiveColor: Colors.black12,
-               )
+              onChanged: (value) {
+                setState(() {
+                  sliderval = value.round();
+                });
+              },
+              activeColor: Colors.green,
+              inactiveColor: Colors.black12,
+            ),
           ],
         ),
       ),

@@ -2,12 +2,16 @@ import 'package:dine/pages/detail.dart';
 import 'package:dine/recipe.dart';
 import 'package:flutter/material.dart';
 
+
+
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
 
   @override
   State<Homepage> createState() => _HomepageState();
 }
+
+int currentindex = 0;
 
 class _HomepageState extends State<Homepage> {
   Widget buildMyrecipecard(Myrecipe recipe) {
@@ -43,7 +47,7 @@ class _HomepageState extends State<Homepage> {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return Detail(recipe: Myrecipe.samples[index],);
+                    return Detail(recipe: Myrecipe.samples[index]);
                   },
                 ),
               );
@@ -52,6 +56,8 @@ class _HomepageState extends State<Homepage> {
           );
         },
       ),
+
+     
     );
   }
 }
